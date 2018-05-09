@@ -63,8 +63,13 @@ $(KERNEL_SOURCE_STAMP): $(TREE_STAMP) $(KERNEL_DOWNLOAD_STAMP)
 # patches with the current machine's platform dependent patches on
 # top.
 #
+ifndef MAKE_CLEAN
+KERNELPATCH_NEW_FILES = $(shell test -d $(KERNEL_SRCPATCHDIR) && test -f $(KERNEL_PATCH_STAMP) && \
+	              find -L $(KERNEL_SRCPATCHDIR) -newer $(KERNEL_PATCH_STAMP) -type f -print -quit)
+endif
+
 kernel-patch: $(KERNEL_PATCH_STAMP)
-$(KERNEL_PATCH_STAMP): $(MACHINE_KERNEL_PATCHDIR)/* $(KERNEL_SOURCE_STAMP)
+$(KERNEL_PATCH_STAMP): $(KERNELPATCH_NEW_FILES) $(MACHINE_KERNEL_PATCHDIR)/* $(KERNEL_SOURCE_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
 	$(Q) echo "==== patching  Linux ===="
 	$(Q) [ -r $(MACHINE_KERNEL_PATCHDIR)/series ] || \
