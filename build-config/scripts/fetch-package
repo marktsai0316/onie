@@ -75,6 +75,12 @@ else
     fi
 fi
 
+# Generate new SHA1
+[ -r "${SHA1DIR}/${FILE}.sha1" ] || {
+    echo "Generate .sha1 file for ${OUTDIR}/${FILE}"
+    cd $OUTDIR
+    sha1sum ${FILE} > ${SHA1DIR}/${FILE}.sha1	 	
+}
 # Verify SHA1
 cd $OUTDIR && sha1sum -c ${SHA1DIR}/${FILE}.sha1 || {
     echo "ERROR: Unable to verify sha1 for ${FILE}"
