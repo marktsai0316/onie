@@ -64,14 +64,14 @@ $(KERNEL_SOURCE_STAMP): $(TREE_STAMP) $(KERNEL_DOWNLOAD_STAMP)
 # top.
 #
 kernel-patch: $(KERNEL_PATCH_STAMP)
-$(KERNEL_PATCH_STAMP): $(MACHINE_KERNEL_PATCHDIR)/* $(KERNEL_SOURCE_STAMP)
+$(KERNEL_PATCH_STAMP): $(KERNEL_SRCPATCHDIR)/* $(MACHINE_KERNEL_PATCHDIR)/* $(KERNEL_SOURCE_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
 	$(Q) echo "==== patching  Linux ===="
 	$(Q) [ -r $(MACHINE_KERNEL_PATCHDIR)/series ] || \
 		(echo "Unable to find machine dependent kernel patch series: $(MACHINE_KERNEL_PATCHDIR)/series" && \
 		exit 1)
 	$(Q) mkdir -p $(KERNEL_PATCHDIR)
-	$(Q) [ ! -d $(KERNEL_SRCPATCHDIR) ] || cp $(KERNEL_SRCPATCHDIR)/* $(KERNEL_PATCHDIR)
+	$(Q) cp $(KERNEL_SRCPATCHDIR)/* $(KERNEL_PATCHDIR)
 	$(Q) cat $(MACHINE_KERNEL_PATCHDIR)/series >> $(KERNEL_PATCHDIR)/series
 	$(Q) $(SCRIPTDIR)/cp-machine-patches $(KERNEL_PATCHDIR) $(MACHINE_KERNEL_PATCHDIR)/series	\
 		$(MACHINE_KERNEL_PATCHDIR) $(MACHINEROOT)/kernel
