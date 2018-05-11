@@ -128,14 +128,15 @@ UPDATER_IMAGE_PARTS_PLATFORM = $(MACHINEDIR)/rootconf/sysroot-lib-onie/test-inst
 # End:
 
 #LINUX_VERSION		= 4.9
-#LINUX_MINOR_VERSION	= 95
+#LINUX_MINOR_VERSION	= 99
+#LINUX_CONFIG 		= conf/kernel/4.9.95/linux.$(ONIE_ARCH).config
 
 LINUX_VERSION		= 4.14
 LINUX_MINOR_VERSION	= 39
+LINUX_CONFIG 		= $(MACHINEDIR)/kernel/linux.$(LINUX_RELEASE).$(ONIE_ARCH).config
 
 #referance other version's  config file
-#LINUX_CONFIG 		= conf/kernel/4.1.38/linux.$(ONIE_ARCH).config
-LINUX_CONFIG 		= $(MACHINEDIR)/kernel/linux.$(LINUX_RELEASE).$(ONIE_ARCH).config
+#LINUX_CONFIG 		= $(MACHINEDIR)/kernel/linux.$(LINUX_RELEASE).$(ONIE_ARCH).config
 #KERNEL_SRCPATCHDIR	= $(PATCHDIR)/kernel/4.14.39
 #MACHINE_KERNEL_PATCHDIR	= $(MACHINEDIR)/kernel
 
