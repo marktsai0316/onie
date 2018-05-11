@@ -8,7 +8,7 @@ MEM=1024
 DISK="$HOME/kvm/onie-x86-demo.img"
 
 # Path to ONIE installer .iso image
-CDROM="$HOME/kvm/onie-recovery-x86_64-kvm_x86_64-r0.iso"
+CDROM="$HOME/kvm/onie-recovery-x86_64-ga-myboard-r0.iso"
 
 # Path to OVMF firmware for qemu
 # Download OVMF from http://www.tianocore.org/ovmf/
