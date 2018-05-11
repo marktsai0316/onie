@@ -5,6 +5,12 @@ Installing ONIE on GIGABYTE MyBoard DEMO (CPU Module : Intel Atom Rangeley (C233
 Cross-Compiling ONIE
 ====================
 
+Preparing a New Build Machine
+  $ cd build-config
+  $ sudo apt-get update
+  $ sudo apt-get install build-essential
+  $ make debian-prepare-build-host
+
 To compile ONIE first change directories to ``build-config`` and then
 type ``"make MACHINEROOT=../machine/gigabyte MACHINE=ga-myboard all"``.  For example::
 
