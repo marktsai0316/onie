@@ -9,6 +9,7 @@ Preparing a New Build Machine
   $ cd build-config
   $ sudo apt-get update
   $ sudo apt-get install build-essential
+  $ sudo apt install libelf-dev
   $ make debian-prepare-build-host
 
 To compile ONIE first change directories to ``build-config`` and then
