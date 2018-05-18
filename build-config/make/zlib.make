@@ -9,10 +9,9 @@
 # This is a makefile fragment that defines the build of zlib
 #
 
-ZLIB_VERSION		= 1.2.8
+ZLIB_VERSION		= 1.2.11
 ZLIB_TARBALL		= zlib-$(ZLIB_VERSION).tar.gz
-ZLIB_TARBALL_URLS	+= $(ONIE_MIRROR) http://zlib.net \
-			   http://softlayer-dal.dl.sourceforge.net/project/libpng/zlib/1.2.8
+ZLIB_TARBALL_URLS	+= $(ONIE_MIRROR) http://zlib.net
 ZLIB_BUILD_DIR		= $(USER_BUILDDIR)/zlib
 ZLIB_DIR		= $(ZLIB_BUILD_DIR)/zlib-$(ZLIB_VERSION)
 
@@ -29,7 +28,7 @@ ZLIB_STAMP		= $(ZLIB_SOURCE_STAMP) \
 PHONY += zlib zlib-download zlib-source zlib-configure \
 	 zlib-build zlib-install zlib-clean zlib-download-clean
 
-ZLIBLIBS = libz.so libz.so.1 libz.so.1.2.8
+ZLIBLIBS = libz.so libz.so.1 libz.so.$(ZLIB_VERSION)
 
 zlib: $(ZLIB_STAMP)
 
