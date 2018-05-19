@@ -10,7 +10,7 @@
 # This is a makefile fragment that defines the build of acpica-tools
 #
 
-ACPICA_TOOLS_VERSION	= 20150410
+ACPICA_TOOLS_VERSION	= 20180508
 ACPICA_TOOLS_TARBALL	= acpica-unix-$(ACPICA_TOOLS_VERSION).tar.gz
 ACPICA_TOOLS_TARBALL_URLS	+= $(ONIE_MIRROR) https://acpica.org/sites/acpica/files/
 ACPICA_TOOLS_BUILD_DIR	= $(USER_BUILDDIR)/acpica-tools
