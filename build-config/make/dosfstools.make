@@ -19,10 +19,12 @@ DOSFSTOOLS_SRCPATCHDIR		= $(PATCHDIR)/dosfstools
 DOSFSTOOLS_DOWNLOAD_STAMP		= $(DOWNLOADDIR)/dosfstools-download
 DOSFSTOOLS_SOURCE_STAMP		= $(USER_STAMPDIR)/dosfstools-source
 DOSFSTOOLS_PATCH_STAMP		= $(USER_STAMPDIR)/dosfstools-patch
+DOSFSTOOLS_CONFIGURE_STAMP	= $(USER_STAMPDIR)/dosfstools-configure
 DOSFSTOOLS_BUILD_STAMP		= $(USER_STAMPDIR)/dosfstools-build
 DOSFSTOOLS_INSTALL_STAMP	= $(STAMPDIR)/dosfstools-install
 DOSFSTOOLS_STAMP		= $(DOSFSTOOLS_SOURCE_STAMP) \
 				  $(DOSFSTOOLS_PATCH_STAMP) \
+				  $(DOSFSTOOLS_CONFIGURE_STAMP) \
 				  $(DOSFSTOOLS_BUILD_STAMP) \
 				  $(DOSFSTOOLS_INSTALL_STAMP)
 
@@ -30,7 +32,7 @@ DOSFSTOOLS_PROGRAMS	= fsck.fat dosfsck fsck.msdos fsck.vfat \
 				mkfs.fat mkdosfs mkfs.msdos mkfs.vfat \
 				fatlabel dosfslabel
 
-PHONY += dosfstools dosfstools-download dosfstools-source dosfstools-patch \
+PHONY += dosfstools dosfstools-download dosfstools-source dosfstools-patch dosfstools-configure \
 	dosfstools-build dosfstools-install dosfstools-clean dosfstools-download-clean
 
 dosfstools: $(DOSFSTOOLS_STAMP)
@@ -59,6 +61,19 @@ $(DOSFSTOOLS_PATCH_STAMP): $(DOSFSTOOLS_SRCPATCHDIR)/* $(DOSFSTOOLS_SOURCE_STAMP
 	$(Q) $(SCRIPTDIR)/apply-patch-series $(DOSFSTOOLS_SRCPATCHDIR)/series $(DOSFSTOOLS_DIR)
 	$(Q) touch $@
 
+dosfstools-configure: $(DOSFSTOOLS_CONFIGURE_STAMP)
+$(DOSFSTOOLS_CONFIGURE_STAMP): $(DOSFSTOOLS_SOURCE_STAMP) | $(DEV_SYSROOT_INIT_STAMP)
+	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
+	$(Q) echo "====  Configure dosfstools-$(DOSFSTOOLS_VERSION) ===="
+	$(Q) cd $(DOSFSTOOLS_DIR) && PATH='$(CROSSBIN):$(PATH)'	\
+		$(DOSFSTOOLS_DIR)/configure			\
+		--prefix=/usr					\
+		--host=$(TARGET)				\
+		CFLAGS="$(ONIE_CFLAGS)" 			\
+		LDFLAGS="$(ONIE_LDFLAGS)"
+	#$(Q) echo "#undef malloc" >> $(DOSFSTOOLS_DIR)/config.h
+	$(Q) touch $@
+	
 ifndef MAKE_CLEAN
 DOSFSTOOLS_NEW_FILES = $(shell test -d $(DOSFSTOOLS_DIR) && test -f $(DOSFSTOOLS_BUILD_STAMP) && \
 	              find -L $(DOSFSTOOLS_DIR) -newer $(DOSFSTOOLS_BUILD_STAMP) -type f \
@@ -71,13 +86,13 @@ DOSFSTOOLS_MAKE_VARS = \
 	DESTDIR=$(DEV_SYSROOT) PREFIX=/usr
 
 dosfstools-build: $(DOSFSTOOLS_BUILD_STAMP)
-$(DOSFSTOOLS_BUILD_STAMP): $(DOSFSTOOLS_PATCH_STAMP) $(DOSFSTOOLS_NEW_FILES) \
+$(DOSFSTOOLS_BUILD_STAMP): $(DOSFSTOOLS_CONFIGURE_STAMP) $(DOSFSTOOLS_NEW_FILES) \
 				| $(DEV_SYSROOT_INIT_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
 	$(Q) echo "====  Building dosfstools-$(DOSFSTOOLS_VERSION) ===="
 	$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(DOSFSTOOLS_DIR) $(DOSFSTOOLS_MAKE_VARS)
-	$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(DOSFSTOOLS_DIR) $(DOSFSTOOLS_MAKE_VARS) \
-		install-symlinks
+	#$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(DOSFSTOOLS_DIR) $(DOSFSTOOLS_MAKE_VARS) \
+	#	install-symlinks
 	$(Q) touch $@
 
 dosfstools-install: $(DOSFSTOOLS_INSTALL_STAMP)
