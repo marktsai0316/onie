@@ -27,8 +27,8 @@ index 1f54a1f..1d03628 100644
  # Pass linker flags here
  LDFLAGS =
  
-++CFLAGS		+= $(ONIE_CFLAGS)
-++LDFLAGS	+= $(ONIE_LDFLAGS)
++CFLAGS		+= $(ONIE_CFLAGS)
++LDFLAGS	+= $(ONIE_LDFLAGS)
 +
  DESTDIR =
  prefix  = /usr/local
