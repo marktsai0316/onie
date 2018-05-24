@@ -1,0 +1,34 @@
+Remove local support patch
+
+uClibc in the ONIE environment does not do locales well, so removing
+local support from dosfstools.
+
+This patch makes the locale init and locale translation no-ops.
+
+diff -ur dosfstools-4.1.orig/src/charconv.h dosfstools-4.1/src/charconv.h
+--- dosfstools-4.1.orig/src/charconv.h	2014-11-10 06:26:57.000000000 +0800
++++ dosfstools-4.1/src/charconv.h	2018-05-25 02:31:02.115710934 +0800
+@@ -3,7 +3,7 @@
+ 
+ #define DEFAULT_DOS_CODEPAGE 437
+ 
+-int set_dos_codepage(int codepage);
+-int dos_char_to_printable(char **p, unsigned char c);
++static inline int set_dos_codepage(int codepage){ return 0; }
++static inline int dos_char_to_printable(char **p, unsigned char c){ return 0; }
+ 
+ #endif
+diff -ur dosfstools-4.1.orig/src/Makefile.in dosfstools-4.1/src/Makefile.in
+--- dosfstools-4.1.orig/src/Makefile.in	2017-01-24 19:49:57.000000000 +0800
++++ dosfstools-4.1/src/Makefile.in	2018-05-25 02:28:49.207707424 +0800
+@@ -116,8 +116,7 @@
+ am__installdirs = "$(DESTDIR)$(sbindir)"
+ PROGRAMS = $(noinst_PROGRAMS) $(sbin_PROGRAMS)
+ am__objects_1 = boot.$(OBJEXT) check.$(OBJEXT) common.$(OBJEXT) \
+-	fat.$(OBJEXT) file.$(OBJEXT) io.$(OBJEXT) lfn.$(OBJEXT) \
+-	charconv.$(OBJEXT)
++	fat.$(OBJEXT) file.$(OBJEXT) io.$(OBJEXT) lfn.$(OBJEXT)
+ am_fatlabel_OBJECTS = fatlabel.$(OBJEXT) $(am__objects_1)
+ fatlabel_OBJECTS = $(am_fatlabel_OBJECTS)
+ fatlabel_LDADD = $(LDADD)
+
