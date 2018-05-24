@@ -9,7 +9,7 @@
 # This is a makefile fragment that defines the build of parted
 #
 
-PARTED_VERSION		= 3.1
+PARTED_VERSION		= 3.2
 PARTED_TARBALL		= parted-$(PARTED_VERSION).tar.xz
 PARTED_TARBALL_URLS	+= $(ONIE_MIRROR) http://ftp.gnu.org/gnu/parted/
 PARTED_BUILD_DIR	= $(USER_BUILDDIR)/parted
