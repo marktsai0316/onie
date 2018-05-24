@@ -1,0 +1,36 @@
+
+gptfdisk ONIE cross compile patch
+
+Copyright (C) 2014 Curt Brune <curt@cumulusnetworks.com>
+
+SPDX-License-Identifier:     GPL-2.0
+
+Small modifications to the gptfdisk Makefile for cross compiling in
+the ONIE build environment.
+
+Main changes:
+
+- prefix gcc and g++ with $(CROSS_PREFIX)
+
+diff -ur gptfdisk-1.0.3.orig/Makefile gptfdisk-1.0.3/Makefile
+--- a/Makefile	2017-07-28 09:41:20.000000000 +0800
++++ b/Makefile	2018-05-25 01:39:50.791629831 +0800
+@@ -1,5 +1,5 @@
+-CC=gcc
+-CXX=g++
++CC=$(CROSS_COMPILE)gcc
++CXX=$(CROSS_COMPILE)g++
+ CFLAGS+=-D_FILE_OFFSET_BITS=64
+ #CXXFLAGS+=-Wall -D_FILE_OFFSET_BITS=64 -D USE_UTF16
+ CXXFLAGS+=-Wall -D_FILE_OFFSET_BITS=64
+@@ -11,6 +11,9 @@
+ LIB_HEADERS=$(LIB_NAMES:=.h)
+ DEPEND= makedepend $(CXXFLAGS)
+ 
++CXXFLAGS+= $(ONIE_CXXFLAGS)
++LDFLAGS+= $(ONIE_LDFLAGS)
++
+ all:	cgdisk gdisk sgdisk fixparts
+ 
+ gdisk:	$(LIB_OBJS) gdisk.o gpttext.o
+
