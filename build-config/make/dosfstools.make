@@ -9,9 +9,9 @@
 # This is a makefile fragment that defines the build of dosfstools
 #
 
-DOSFSTOOLS_VERSION		= 3.0.26
+DOSFSTOOLS_VERSION		= 4.1
 DOSFSTOOLS_TARBALL		= dosfstools-$(DOSFSTOOLS_VERSION).tar.xz
-DOSFSTOOLS_TARBALL_URLS		+= $(ONIE_MIRROR) http://daniel-baumann.ch/files/software/dosfstools
+DOSFSTOOLS_TARBALL_URLS		+= $(ONIE_MIRROR) https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VERSION)
 DOSFSTOOLS_BUILD_DIR		= $(USER_BUILDDIR)/dosfstools
 DOSFSTOOLS_DIR			= $(DOSFSTOOLS_BUILD_DIR)/dosfstools-$(DOSFSTOOLS_VERSION)
 
