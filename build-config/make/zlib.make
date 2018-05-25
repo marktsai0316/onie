@@ -10,9 +10,9 @@
 #
 
 ZLIB_VERSION		= 1.2.11
-ZLIB_TARBALL		= zlib-$(ZLIB_VERSION).tar.gz \
+ZLIB_TARBALL		= zlib-$(ZLIB_VERSION).tar.gz 
+ZLIB_TARBALL_URLS	+= $(ONIE_MIRROR) http://zlib.net \
 				https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VERSION)
-ZLIB_TARBALL_URLS	+= $(ONIE_MIRROR) http://zlib.net
 ZLIB_BUILD_DIR		= $(USER_BUILDDIR)/zlib
 ZLIB_DIR		= $(ZLIB_BUILD_DIR)/zlib-$(ZLIB_VERSION)
 
