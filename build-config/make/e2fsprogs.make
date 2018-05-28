@@ -9,7 +9,7 @@
 # This is a makefile fragment that defines the build of e2fsprogs
 #
 
-E2FSPROGS_VERSION		= 1.42.13
+E2FSPROGS_VERSION		= 1.44.2
 E2FSPROGS_TARBALL		= e2fsprogs-$(E2FSPROGS_VERSION).tar.xz
 E2FSPROGS_TARBALL_URLS		+= $(ONIE_MIRROR) \
 				   https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v$(E2FSPROGS_VERSION)
@@ -77,6 +77,7 @@ $(E2FSPROGS_CONFIGURE_STAMP): $(ZLIB_BUILD_STAMP) $(LZO_BUILD_STAMP) \
 		--prefix=/usr					\
 		--host=$(TARGET)				\
 		--disable-tls					\
+		--disable-nls					\
 		--disable-defrag				\
 		--enable-symlink-build				\
 		--disable-libuuid				\
