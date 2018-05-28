@@ -10,6 +10,7 @@
 #
 
 ZLIB_VERSION		= 1.2.11
+ZLIB_MAJOR_VERSION	= $(firstword $(subst ., ,$(ZLIB_VERSION)))
 ZLIB_TARBALL		= zlib-$(ZLIB_VERSION).tar.gz 
 ZLIB_TARBALL_URLS	+= $(ONIE_MIRROR) http://zlib.net \
 				https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VERSION)
@@ -29,7 +30,7 @@ ZLIB_STAMP		= $(ZLIB_SOURCE_STAMP) \
 PHONY += zlib zlib-download zlib-source zlib-configure \
 	 zlib-build zlib-install zlib-clean zlib-download-clean
 
-ZLIBLIBS = libz.so libz.so.1 libz.so.$(ZLIB_VERSION)
+ZLIBLIBS = libz.so libz.so.$(ZLIB_MAJOR_VERSION) libz.so.$(ZLIB_VERSION)
 
 zlib: $(ZLIB_STAMP)
 
