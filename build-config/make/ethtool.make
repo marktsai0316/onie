@@ -9,7 +9,7 @@
 # This is a makefile fragment that defines the build of ethtool
 #
 
-ETHTOOL_VERSION		= 3.14
+ETHTOOL_VERSION		= 4.16
 ETHTOOL_TARBALL		= ethtool-$(ETHTOOL_VERSION).tar.xz
 ETHTOOL_TARBALL_URLS	+= $(ONIE_MIRROR) https://www.kernel.org/pub/software/network/ethtool
 ETHTOOL_BUILD_DIR	= $(USER_BUILDDIR)/ethtool
