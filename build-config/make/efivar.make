@@ -10,9 +10,9 @@
 # This is a makefile fragment that defines the build of efivar
 #
 
-EFIVAR_VERSION			= 30
+EFIVAR_VERSION			= 35
 EFIVAR_TARBALL			= efivar-$(EFIVAR_VERSION).tar.bz2
-EFIVAR_TARBALL_URLS		+= $(ONIE_MIRROR) https://github.com/rhinstaller/efivar/releases/download/$(EFIVAR_VERSION)
+EFIVAR_TARBALL_URLS		+= $(ONIE_MIRROR) https://github.com/rhboot/efivar/releases/download/$(EFIVAR_VERSION)
 EFIVAR_BUILD_DIR		= $(USER_BUILDDIR)/efivar
 EFIVAR_DIR			= $(EFIVAR_BUILD_DIR)/efivar-$(EFIVAR_VERSION)
 
