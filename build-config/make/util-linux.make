@@ -10,7 +10,7 @@
 # from the util-linux package.
 #
 
-UTILLINUX_VERSION		= 2.27
+UTILLINUX_VERSION		= 2.32
 UTILLINUX_TARBALL		= util-linux-$(UTILLINUX_VERSION).tar.xz
 UTILLINUX_TARBALL_URLS		+= $(ONIE_MIRROR) \
 					https://www.kernel.org/pub/linux/utils/util-linux/v$(UTILLINUX_VERSION)/
