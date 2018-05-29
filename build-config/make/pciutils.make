@@ -9,7 +9,7 @@
 # This is a makefile fragment that defines the build of pciutils
 #
 
-PCIUTILS_VERSION		= 3.2.1
+PCIUTILS_VERSION		= 3.5.6
 PCIUTILS_TARBALL		= pciutils-$(PCIUTILS_VERSION).tar.xz
 PCIUTILS_TARBALL_URLS		+= $(ONIE_MIRROR) https://www.kernel.org/pub/software/utils/pciutils
 PCIUTILS_BUILD_DIR		= $(USER_BUILDDIR)/pciutils
