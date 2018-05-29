@@ -1,0 +1,50 @@
+diff -ur a/Cryptlib/Makefile b/Cryptlib/Makefile
+--- a/Cryptlib/Makefile	2018-04-06 02:49:17.000000000 +0800
++++ b/Cryptlib/Makefile	2018-05-29 18:59:18.178402832 +0800
+@@ -21,6 +21,10 @@
+ endif
+ LDFLAGS		= -nostdlib -znocombreloc
+ 
++# Seed compiler and linker flags ONIE build environment flags
++CFLAGS		+= $(ONIE_CFLAGS)
++LDFLAGS		+= $(ONIE_LDFLAGS)
++
+ TARGET		= libcryptlib.a
+ OBJS		=   Hash/CryptMd4Null.o \
+ 		    Hash/CryptMd5.o \
+diff -ur a/Cryptlib/OpenSSL/Makefile b/Cryptlib/OpenSSL/Makefile
+--- a/Cryptlib/OpenSSL/Makefile	2018-04-06 02:49:17.000000000 +0800
++++ b/Cryptlib/OpenSSL/Makefile	2018-05-29 18:59:15.982402774 +0800
+@@ -27,6 +27,10 @@
+ endif
+ LDFLAGS		= -nostdlib -znocombreloc
+ 
++# Seed compiler and linker flags ONIE build environment flags
++CFLAGS		+= $(ONIE_CFLAGS)
++LDFLAGS		+= $(ONIE_LDFLAGS)
++
+ TARGET		= libopenssl.a
+ OBJS		=   crypto/cryptlib.o \
+   crypto/mem.o \
+diff -ur a/Makefile b/Makefile
+--- a/Makefile	2018-04-06 02:49:17.000000000 +0800
++++ b/Makefile	2018-05-29 18:59:13.794402717 +0800
+@@ -129,7 +129,7 @@
+ endif
+ 
+ install-deps : $(TARGETS)
+-install-deps : $(SHIMNAME).debug $(MMNAME).debug $(FBNAME).debug buildid
++install-deps : $(SHIMNAME).debug $(MMNAME).debug $(FBNAME).debug
+ install-deps : $(BOOTCSVNAME)
+ 
+ install-debugsource : install-deps
+@@ -140,7 +140,7 @@
+ 		$(INSTALL) -m 0644 $${file} $(DESTDIR)/$(DEBUGSOURCE)/$(PKGNAME)-$(VERSION)$(DASHRELEASE)/$${outfile} ; \
+ 	done
+ 
+-install-debuginfo : install-deps
++install-debuginfo : install-deps buildid
+ 	$(INSTALL) -d -m 0755 $(DESTDIR)/
+ 	$(INSTALL) -d -m 0755 $(DESTDIR)/$(DEBUGINFO)$(TARGETDIR)/
+ 	@./buildid $(wildcard *.efi.debug) | while read file buildid ; do \
+
