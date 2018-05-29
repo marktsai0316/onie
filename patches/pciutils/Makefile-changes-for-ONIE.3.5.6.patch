@@ -1,6 +1,6 @@
 diff -ur pciutils-3.5.6.orig/lib/configure pciutils-3.5.6/lib/configure
 --- pciutils-3.5.6.orig/lib/configure	2017-11-17 20:55:33.000000000 +0800
-+++ pciutils-3.5.6/lib/configure	2018-05-29 21:32:34.150645666 +0800
++++ pciutils-3.5.6/lib/configure	2018-05-30 02:10:47.279086474 +0800
 @@ -39,7 +39,7 @@
  fi
  [ -n "$RELEASE" ] && rel="${RELEASE}"
@@ -12,7 +12,7 @@ diff -ur pciutils-3.5.6.orig/lib/configure pciutils-3.5.6/lib/configure
  echo " $host $rel $cpu $sys"
 diff -ur pciutils-3.5.6.orig/Makefile pciutils-3.5.6/Makefile
 --- pciutils-3.5.6.orig/Makefile	2017-11-17 21:00:27.000000000 +0800
-+++ pciutils-3.5.6/Makefile	2018-05-29 21:31:55.446644644 +0800
++++ pciutils-3.5.6/Makefile	2018-05-30 02:11:17.803087280 +0800
 @@ -4,6 +4,10 @@
  OPT=-O2
  CFLAGS=$(OPT) -Wall -W -Wno-parentheses -Wstrict-prototypes -Wmissing-prototypes
@@ -24,4 +24,20 @@ diff -ur pciutils-3.5.6.orig/Makefile pciutils-3.5.6/Makefile
  VERSION=3.5.6
  DATE=2017-11-17
  
+@@ -121,6 +125,7 @@
+ 	ln -sf $(PCILIB) $(DESTDIR)$(LIBDIR)/$(LIBNAME)$(ABI_VERSION).$(LIBEXT)
+ else
+ 	ln -sf $(PCILIB) $(DESTDIR)$(LIBDIR)/$(LIBNAME).$(LIBEXT)$(ABI_VERSION)
++	ln -sf $(LIBNAME).$(LIBEXT)$(ABI_VERSION) $(DESTDIR)$(LIBDIR)/$(LIBNAME).$(LIBEXT)
+ endif
+ endif
+ 
+@@ -140,6 +145,7 @@
+ ifeq ($(LIBEXT),dylib)
+ 	ln -sf $(LIBNAME)$(ABI_VERSION).$(LIBEXT) $(DESTDIR)$(LIBDIR)/$(LIBNAME).$(LIBEXT)
+ else
++	ln -sf $(PCILIB) $(DESTDIR)$(LIBDIR)/$(LIBNAME).$(LIBEXT)$(ABI_VERSION)
+ 	ln -sf $(LIBNAME).$(LIBEXT)$(ABI_VERSION) $(DESTDIR)$(LIBDIR)/$(LIBNAME).$(LIBEXT)
+ endif
+ endif
 
