@@ -34,10 +34,10 @@ PHONY += efivar efivar-download efivar-source efivar-patch \
 
 EFIVAR_BINS = efivar
 EFIVAR_LIBS = \
-	libefivar.so.1.30 \
+	libefivar.so.1.$(EFIVAR_VERSION) \
 	libefivar.so.1 \
 	libefivar.so \
-	libefiboot.so.1.30 \
+	libefiboot.so.1.$(EFIVAR_VERSION) \
 	libefiboot.so.1 \
 	libefiboot.so
 
