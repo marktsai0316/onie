@@ -11,7 +11,7 @@
 
 PESIGN_VERSION			= 0.112
 PESIGN_TARBALL			= pesign-$(PESIGN_VERSION).tar.bz2
-PESIGN_TARBALL_URLS		+= $(ONIE_MIRROR) https://github.com/rhinstaller/pesign/releases/download/$(PESIGN_VERSION)
+PESIGN_TARBALL_URLS		+= $(ONIE_MIRROR) https://github.com/rhboot/pesign/releases/download/$(PESIGN_VERSION)
 PESIGN_BUILD_DIR		= $(USER_BUILDDIR)/pesign
 PESIGN_DIR			= $(PESIGN_BUILD_DIR)/pesign-$(PESIGN_VERSION)
 
