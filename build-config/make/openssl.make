@@ -9,7 +9,7 @@
 # This is a makefile fragment that defines the build of openssl
 #
 
-OPENSSL_VERSION		= 1.0.2l
+OPENSSL_VERSION		= 1.1.0h
 OPENSSL_TARBALL		= openssl-$(OPENSSL_VERSION).tar.gz
 OPENSSL_TARBALL_URLS	+= $(ONIE_MIRROR) \
 			   https://www.openssl.org/source
@@ -63,7 +63,7 @@ $(OPENSSL_CONFIGURE_STAMP): $(OPENSSL_SOURCE_STAMP) $(ZLIB_BUILD_STAMP) \
 	$(Q) echo "====  Configure openssl-$(OPENSSL_VERSION) ===="
 	$(Q) cd $(OPENSSL_DIR) && PATH='$(CROSSBIN):$(PATH)'	\
 		$(OPENSSL_DIR)/config				\
-		--prefix=/usr					\
+		--prefix=$(DEV_SYSROOT)/usr					\
 		--cross-compile-prefix=$(CROSSPREFIX)		\
 		shared						\
 		enable-ssl-trace				\
@@ -84,7 +84,7 @@ $(OPENSSL_BUILD_STAMP): $(OPENSSL_NEW_FILES) $(OPENSSL_CONFIGURE_STAMP)
 	$(Q) echo "====  Building openssl-$(OPENSSL_VERSION) ===="
 	$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(OPENSSL_DIR)
 	$(Q) PATH='$(CROSSBIN):$(PATH)' $(MAKE) -C $(OPENSSL_DIR) \
-		INSTALL_PREFIX=$(DEV_SYSROOT) install_sw
+		install_sw
 	$(Q) for file in $(OPENSSL_LIBS) ; do \
 		chmod u+w -R $(DEV_SYSROOT)/usr/lib/$$file ; \
 	     done
