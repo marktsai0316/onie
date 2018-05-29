@@ -67,11 +67,11 @@ $(DOSFSTOOLS_CONFIGURE_STAMP): $(DOSFSTOOLS_SOURCE_STAMP) | $(DEV_SYSROOT_INIT_S
 	$(Q) echo "====  Configure dosfstools-$(DOSFSTOOLS_VERSION) ===="
 	$(Q) cd $(DOSFSTOOLS_DIR) && PATH='$(CROSSBIN):$(PATH)'	\
 		$(DOSFSTOOLS_DIR)/configure			\
+		--enable-compat-symlinks			\
 		--prefix=/usr					\
 		--host=$(TARGET)				\
 		CFLAGS="$(ONIE_CFLAGS)" 			\
 		LDFLAGS="$(ONIE_LDFLAGS)"
-	#$(Q) echo "#undef malloc" >> $(DOSFSTOOLS_DIR)/config.h
 	$(Q) touch $@
 	
 ifndef MAKE_CLEAN
@@ -91,8 +91,8 @@ $(DOSFSTOOLS_BUILD_STAMP): $(DOSFSTOOLS_CONFIGURE_STAMP) $(DOSFSTOOLS_NEW_FILES)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
 	$(Q) echo "====  Building dosfstools-$(DOSFSTOOLS_VERSION) ===="
 	$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(DOSFSTOOLS_DIR) $(DOSFSTOOLS_MAKE_VARS)
-	#$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(DOSFSTOOLS_DIR) $(DOSFSTOOLS_MAKE_VARS) \
-	#	install-symlinks
+	$(Q) PATH='$(CROSSBIN):$(PATH)'	$(MAKE) -C $(DOSFSTOOLS_DIR) $(DOSFSTOOLS_MAKE_VARS) \
+		install
 	$(Q) touch $@
 
 dosfstools-install: $(DOSFSTOOLS_INSTALL_STAMP)
