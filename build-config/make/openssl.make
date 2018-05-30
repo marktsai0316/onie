@@ -10,6 +10,7 @@
 #
 
 OPENSSL_VERSION		= 1.1.0h
+OPENSSL_MAJOR_VERSION	= $(word 1,$(subst ., ,$(OPENSSL_VERSION))).$(word 2,$(subst ., ,$(OPENSSL_VERSION)))
 OPENSSL_TARBALL		= openssl-$(OPENSSL_VERSION).tar.gz
 OPENSSL_TARBALL_URLS	+= $(ONIE_MIRROR) \
 			   https://www.openssl.org/source
@@ -31,9 +32,9 @@ PHONY += openssl openssl-download openssl-source \
 	 openssl-download-clean
 
 OPENSSL_LIBS	= \
-	engines \
-	libcrypto.so libcrypto.so.1.0.0 \
-	libssl.so libssl.so.1.0.0
+	engines-$(OPENSSL_MAJOR_VERSION) \
+	libcrypto.so libcrypto.so.$(OPENSSL_MAJOR_VERSION) \
+	libssl.so libssl.so.$(OPENSSL_MAJOR_VERSION)
 
 OPENSSL_BINS	= openssl
 
@@ -94,7 +95,7 @@ openssl-install: $(OPENSSL_INSTALL_STAMP)
 $(OPENSSL_INSTALL_STAMP): $(SYSROOT_INIT_STAMP) $(OPENSSL_BUILD_STAMP) $(ZLIB_INSTALL_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
 	$(Q) echo "==== Installing openssl in $(SYSROOTDIR) ===="
-	$(Q) cp -av $(DEV_SYSROOT)/usr/ssl $(SYSROOTDIR)/usr
+	$(Q) #cp -av $(DEV_SYSROOT)/usr/ssl $(SYSROOTDIR)/usr
 	$(Q) for file in $(OPENSSL_LIBS) ; do \
 		cp -av $(DEV_SYSROOT)/usr/lib/$$file $(SYSROOTDIR)/usr/lib/ ; \
 	     done
