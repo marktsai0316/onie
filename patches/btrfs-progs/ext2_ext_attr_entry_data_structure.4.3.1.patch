@@ -1,0 +1,13 @@
+diff -ur btrfs-progs-v4.3.1.orig/btrfs-convert.c btrfs-progs-v4.3.1/btrfs-convert.c
+--- btrfs-progs-v4.3.1.orig/btrfs-convert.c	2015-11-16 21:29:25.000000000 +0800
++++ btrfs-progs-v4.3.1/btrfs-convert.c	2018-05-30 13:27:33.186435385 +0800
+@@ -712,7 +712,7 @@
+ {
+ 	size_t value_size = entry->e_value_size;
+ 
+-	if (entry->e_value_block != 0 || value_size > size ||
++	if (entry->e_value_inum != 0 || value_size > size ||
+ 	    entry->e_value_offs + value_size > size)
+ 		return -EIO;
+ 	return 0;
+
