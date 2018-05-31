@@ -37,7 +37,7 @@ DOWNLOAD += $(MTDUTILS_DOWNLOAD_STAMP)
 mtd-utils-download: $(MTDUTILS_DOWNLOAD_STAMP)
 $(MTDUTILS_DOWNLOAD_STAMP): $(PROJECT_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
-	$(Q) echo "==== Getting upstream mtdutils ===="
+	$(Q) echo "==== Getting upstream mtd-utils ===="
 	$(Q) $(SCRIPTDIR)/fetch-package $(DOWNLOADDIR) $(UPSTREAMDIR) \
 		$(MTDUTILS_COMMIT).tar.gz $(MTDUTILS_TARBALL_URLS)
 	$(Q) cd $(DOWNLOADDIR) && cp $(MTDUTILS_COMMIT).tar.gz $(MTDUTILS_TARBALL)
@@ -47,7 +47,7 @@ SOURCE += $(MTDUTILS_SOURCE_STAMP)
 mtd-utils-source: $(MTDUTILS_SOURCE_STAMP)
 $(MTDUTILS_SOURCE_STAMP): $(USER_TREE_STAMP) | $(MTDUTILS_DOWNLOAD_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
-	$(Q) echo "==== Extracting upstream mtdutils ===="
+	$(Q) echo "==== Extracting upstream mtd-utils ===="
 	$(Q) $(SCRIPTDIR)/extract-package $(MTDUTILS_BUILD_DIR) $(DOWNLOADDIR)/$(MTDUTILS_TARBALL)
 	$(Q) touch $@
 
@@ -80,7 +80,7 @@ mtd-utils-install: $(MTDUTILS_INSTALL_STAMP)
 $(MTDUTILS_INSTALL_STAMP): $(SYSROOT_INIT_STAMP) $(MTDUTILS_BUILD_STAMP) $(UTILLINUX_INSTALL_STAMP) \
 				$(LZO_INSTALL_STAMP) $(ZLIB_INSTALL_STAMP)
 	$(Q) rm -f $@ && eval $(PROFILE_STAMP)
-	$(Q) echo "==== Installing mtdutils in $(SYSROOTDIR) ===="
+	$(Q) echo "==== Installing mtd-utils in $(SYSROOTDIR) ===="
 	$(Q) for file in $(MTDBINS) ; do \
 		cp -av $(DEV_SYSROOT)/usr/sbin/$$file $(SYSROOTDIR)/usr/sbin/ ; \
 	done
