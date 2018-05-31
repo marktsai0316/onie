@@ -365,7 +365,7 @@ include make/zlib.make
 include make/lzo.make
 include make/util-linux.make
 ifeq ($(MTDUTILS_ENABLE),yes)
-  include make/mtdutils.make
+  include make/mtd-utils.make
 endif
 include make/dropbear.make
 ifeq ($(EXT3_4_ENABLE),yes)
