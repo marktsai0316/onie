@@ -40,7 +40,7 @@ $(MTDUTILS_DOWNLOAD_STAMP): $(PROJECT_STAMP)
 	$(Q) echo "==== Getting upstream mtdutils ===="
 	$(Q) $(SCRIPTDIR)/fetch-package $(DOWNLOADDIR) $(UPSTREAMDIR) \
 		$(MTDUTILS_COMMIT).tar.gz $(MTDUTILS_TARBALL_URLS)
-	$(Q) cd $(DOWNLOADDIR) && ln -fs $(MTDUTILS_COMMIT).tar.gz $(MTDUTILS_TARBALL)
+	$(Q) cd $(DOWNLOADDIR) && cp $(MTDUTILS_COMMIT).tar.gz $(MTDUTILS_TARBALL)
 	$(Q) touch $@
 
 SOURCE += $(MTDUTILS_SOURCE_STAMP)
